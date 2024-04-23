@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdvanceSalaryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SalesController;
@@ -75,6 +76,16 @@ Route::middleware(['auth', 'locale'])->group(function () {
         Route::get('data','getHolidaysData')->name('getHolidaysData');
     });
 
+    Route::name('advancesalary.')->prefix('advance/salary')->controller(AdvanceSalaryController::class)->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/store', 'store')->name('store');
+        Route::get('/edit/{id}', 'edit')->name('edit');
+        Route::post('/update/{id}', 'update')->name('update');
+        Route::post('/delete/{id}', 'destroy')->name('destroy');
+        Route::get('data','getAdvanceSalaryData')->name('getAdvanceSalaryData');
+    });
+
     Route::name('leavetype.')->prefix('leave/type')->controller(LeaveTypeController::class)->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/create', 'create')->name('create');
@@ -121,6 +132,8 @@ Route::middleware(['auth', 'locale'])->group(function () {
         Route::post('{experienceId}/documentDelete','documentDelete')->name('document.destroy');
         Route::post('update/{userId}/document','updateDocument')->name('document');
         Route::get('getData','getData')->name('getData');
+        Route::get('branches/getData','getBranchesData')->name('branches.getData');
+
     });
 
     Route::name('permissions.')->prefix('permissions')->controller(UserTypeController::class)->group(function(){

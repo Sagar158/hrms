@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Helpers\Helper;
+use App\Models\Branches;
 use App\Models\UserAddress;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -442,5 +443,17 @@ class UserController extends Controller
 
         return response()->json(['data' => $users]);
 
+    }
+
+    public function getBranchesData(Request $request)
+    {
+        $branches = Branches::select('id','name');
+        if($request->filled('search'))
+        {
+            $branches = $branches->where('name', 'LIKE','%'.$request->search.'%');
+        }
+        $branches = $branches->get();
+
+        return response()->json(['data' => $branches]);
     }
 }

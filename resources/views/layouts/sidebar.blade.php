@@ -61,6 +61,15 @@
             </a>
         </li>
         @endcan
+        <li class="nav-item nav-category">Advance Salary</li>
+        @can('viewAny', \App\Models\AdvanceSalary::class)
+            <li class="nav-item">
+                <a href="{{ route('advancesalary.index') }}" class="nav-link">
+                <i class="link-icon" data-feather="dollar-sign"></i>
+                <span class="link-title">Advance Salary</span>
+                </a>
+            </li>
+        @endcan
         <li class="nav-item nav-category">Employees</li>
         @can('viewAny',\App\Models\User::class)
             <li class="nav-item">
